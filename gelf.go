@@ -123,6 +123,7 @@ func (m GelfMessage) getExtraFields() (json.RawMessage, error) {
 		"_command":        strings.Join(m.Container.Config.Cmd[:], " "),
 		"_created":        m.Container.Created,
 		"_enviroment":     strings.Join(m.Container.Config.Env[:], " "),
+		"_rancher_stack_name":             m.Container.Config.Labels["io.rancher.stack_service.name"],
 	}
 	for name, label := range m.Container.Config.Labels {
 		if strings.HasPrefix(strings.ToLower(name), "gelf_") == true {
